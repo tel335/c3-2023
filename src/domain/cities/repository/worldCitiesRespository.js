@@ -7,7 +7,7 @@ exports.getAllCitiesRepository = () => {
 exports.searchCitiesByCountryName = (inputCountryName) => {
     const result = []
     worldCitiesDataset.forEach((cityObject) => {
-        if(inputCountryName === cityObject.country) result.push(cityObject)
+        if(inputCountryName === cityObject.country && inputCountryName.length>=3) result.push(cityObject)
     })
     return result
 }
