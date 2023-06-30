@@ -16,3 +16,4 @@ describe('GET /health', () => {
         expect(response.body).toEqual({ message: 'ok' })
     })
 })
+
