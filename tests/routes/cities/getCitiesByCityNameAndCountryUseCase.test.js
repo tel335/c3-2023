@@ -1,0 +1,41 @@
+import request from 'supertest'
+import { server, app } from '../../../src/index'
+
+//Este test busca probar los casos de uso que tengan que ver con busqueda por pais y ciudad a la vez, son similes a la busqueda unicamente por pais
+describe('/api/city/:city/country/:country', () => {
+    afterAll(() => {
+        server.close()
+    })
+
+    test('Si se encuentran resultados, deberia responder con codigo 200 y devolver un arreglo con los resultados', async () => { 
+        const validCountry = 'chile'
+        const validCity = 'santiago'
+        let urlcity = '/api/city/'.concat(validCity)
+        let urlmid = urlcity.concat('/country/')
+        let url = urlmid.concat(validCountry)
+        const response = await request(app.callback()).get(url) //No pude seguir, pero por ahi iba la cosa
+        expect(response.status).toBe(200)
+        expect(Array.isArray(response.body)).toBe(true)
+        expect(response.body.length > 0).toBe(true)
+    })
+
+    test('Si no se encuentran resultados, deberia responder con codigo 200 y un objeto de formato especifico', async () => { 
+        const invalidCountry = 'chule'
+        const expObj = {
+            "message": "No se encontraron ciudades para el país ingresado"
+        }
+        const response = await request(app.callback()).get('/api/cities/by_country/'.concat(invalidCountry))
+        expect(response.status).toBe(200)
+        expect(response.body).toEqual(expObj)
+    })
+
+    test('Si se envia como parametro un string con caracteres numericos, deberia responder con codigo 400 y un objeto de formato especifico', async () => { 
+        const NumString = 'Numericos98'
+        const expObj = {
+            "message": "Solo se aceptan caracteres no numéricos"
+        }
+        const response = await request(app.callback()).get('/api/cities/by_country/'.concat(NumString))
+        expect(response.status).toBe(400)
+        expect(response.body).toEqual(expObj)
+    })
+})
