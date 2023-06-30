@@ -4,10 +4,10 @@ exports.getAllCitiesRepository = () => {
     return worldCitiesDataset
 }
 
-exports.searchCitiesByCountryName = (inputCountryName) => {
+exports.searchCitiesByCountryName = (inputCountryName) => { //Modificar el algoritmo de busqueda para que sea case insensitive
     const result = []
     worldCitiesDataset.forEach((cityObject) => {
-        if(inputCountryName === cityObject.country) result.push(cityObject)
+        if((inputCountryName.toLowerCase()) === (cityObject.country.toLowerCase())) result.push(cityObject)
     })
     return result
 }
