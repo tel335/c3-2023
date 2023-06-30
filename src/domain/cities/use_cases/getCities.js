@@ -14,7 +14,7 @@ exports.getCitiesByCountryUseCase = (ctx) => {
     }
     if(ctx.body.country === undefined){ 
         ctx.status= 200
-        ctx.body={"message": "No se encontraron ciudades para el país ingresado"}
+        ctx.body={message: "No se encontraron ciudades para el país ingresado"}
         return ctx
     }
     if(ctx.params.country.match(/\d+/g)){
@@ -32,7 +32,7 @@ exports.getCitiesByCityNameAndCountryUseCase = (ctx) => {
     //si la consulta es valida pero no se encuentra
     if(ctx.body.body.city === undefined){
         ctx.status= 200
-        ctx.body={"message": "No se encontraron ciudades para el país ingresado"}
+        ctx.body={message : "No se encontraron ciudades para el país ingresado"}
         return ctx
     }
     //si la consulta es invalida
