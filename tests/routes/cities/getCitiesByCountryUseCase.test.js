@@ -24,4 +24,14 @@ describe('/api/cities/by_country/:country', () => {
         expect(response.status).toBe(200)
         expect(response.body).toEqual(expObj)
     })
+
+    test('Si se envia como parametro un string con caracteres numericos, deberia responder con codigo 400 y un objeto de formato especifico', async () => { 
+        const NumString = 'Numericos98'
+        const expObj = {
+            "message": "Solo se aceptan caracteres no numéricos"
+        }
+        const response = await request(app.callback()).get('/api/cities/by_country/'.concat(NumString))
+        expect(response.status).toBe(400)
+        expect(response.body).toEqual(expObj)
+    })
 })
