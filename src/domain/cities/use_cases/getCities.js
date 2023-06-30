@@ -6,11 +6,13 @@ exports.getAllCitiesUseCase = (ctx) => {
 }
 
 exports.getCitiesByCountryUseCase = (ctx) => {
-    ctx.body = citiesRepository.searchCitiesByCountryName(ctx.params.country)
+    const [message,error] = citiesRepository.searchCitiesByCountryName(ctx.params.country)
+    ctx.body = message
     return ctx
 }
 
 exports.getCitiesByCityNameAndCountryUseCase = (ctx) => {
-    ctx.body = citiesRepository.searchCityByCityNameAndCountry(ctx.params.city, ctx.params.country)
+    const [message,error] = citiesRepository.searchCityByCityNameAndCountry(ctx.params.city, ctx.params.country)
+    ctx.body = message
     return ctx
 }
