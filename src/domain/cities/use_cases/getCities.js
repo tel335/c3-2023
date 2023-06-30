@@ -30,7 +30,7 @@ exports.getCitiesByCityNameAndCountryUseCase = (ctx) => {
     ctx.body = citiesRepository.searchCityByCityNameAndCountry(ctx.params.city, ctx.params.country)
 
     //si la consulta es valida pero no se encuentra
-    if(ctx.body.body.city === undefined){
+    if(ctx.body.city === undefined){
         ctx.status= 200
         ctx.body={message : "No se encontraron ciudades para el país ingresado"}
         return ctx
