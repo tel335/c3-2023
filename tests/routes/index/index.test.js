@@ -18,5 +18,3 @@ describe('GET /api/cities', () => {
         })
     })
 })
-
-

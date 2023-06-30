@@ -6,7 +6,23 @@ exports.getAllCitiesUseCase = (ctx) => {
 }
 
 exports.getCitiesByCountryUseCase = (ctx) => {
-    ctx.body = citiesRepository.searchCitiesByCountryName(ctx.params.country)
+    const country = ctx.params.country.toLowerCase()
+
+    if (/^\d+$/.test(country)) { //siesq se ingresa un "pais" con solo numeros
+        ctx.status = 400
+        ctx.body = { message: 'Solo se aceptan caracteres no numéricos' }
+    } else {
+        const cities = citiesRepository.searchCitiesByCountryName(country)
+
+        if (cities.length === 0) {
+            ctx.status = 200
+            ctx.body = { message: 'No se encontraron ciudades para el país ingresado' }
+        } else {
+            ctx.status = 200
+            ctx.body = { cities }
+        }
+    }
+
     return ctx
 }
 
