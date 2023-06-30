@@ -1,6 +1,6 @@
-# Integration / unit tests example
+# Control 3 - 2023, semestre 1
 
-En este proyecto generamos una suite de tests de integración, sumado a un test unitario.
+En este control, deberemos de tomar una serie de criterios de aceptación y convertirlos en tests de todo el flujo.
 Para poder ejecutar, debe instalar las librerías necesarias:
 
 ```
